@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <!-- 这个一定要记得加，否则导航部分没样式 -->
+  <body class="amis-scope">
+    <div
+      class="a-Layout a-Layout--withAside a-Layout--headerFixed a-Layout--asideFixed a-Layout--noFooter"
+    >
+      <div class="a-Layout-header">
+        <div>
+          <div class="a-Layout-brandBar">
+            <button class="pull-right visible-xs">
+              <i class="glyphicon glyphicon-align-justify"></i>
+            </button>
+            <div class="a-Layout-brand">
+              <i class="fa fa-paw"></i
+              ><span class="hidden-folded m-l-sm">AMis Boilerplate</span>
+            </div>
+          </div>
+          <div class="a-Layout-headerBar">
+            <div class="nav navbar-nav hidden-xs">
+              <button
+                id="aside-toggler"
+                type="button"
+                class="a-Button a-Button--link a-Button--iconOnly navbar-btn"
+              >
+                <i class="fa fa-dedent"></i>
+              </button>
+            </div>
+            <div class="hidden-xs p-t-sm pull-right">
+              <div class="dropdown">
+                <span
+                  ><span class="pull-right m-b-n-sm m-l-sm"
+                    ><span><i class="iconfont icon-admin"></i></span
+                    ><i class="on md b-white bottom"></i></span
+                  ><span class="hidden-sm hidden-md">admin</span
+                  ><b class="caret"></b
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="a-Layout-aside">
+        <div class="a-Layout-asideWrap">
+          <div id="asideInner" class="a-Layout-asideInner">
+            <!--导航部分-->
+            <nav class="a-AsideNav">
+              <ul class="a-AsideNav-list">
+                <li class="a-AsideNav-label"><span>导航</span></li>
+                <li class="a-AsideNav-item">
+                  <a href="/"
+                    ><i
+                      class="a-AsideNav-itemIcon glyphicon glyphicon-signal"
+                    ></i
+                    ><span class="a-AsideNav-itemLabel">Dashboard</span></a
+                  >
+                  <div class="a-AsideNav-tooltip">Dashboard</div>
+                </li>
+                <li class="a-AsideNav-item is-open">
+                  <a
+                    ><span class="a-AsideNav-itemArrow"></span
+                    ><i class="a-AsideNav-itemIcon glyphicon glyphicon-edit"></i
+                    ><span class="a-AsideNav-itemLabel">表单页面</span></a
+                  >
+                  <ul class="a-AsideNav-subList">
+                    <li class="a-AsideNav-subHeader"><a>表单页面</a></li>
+                    <li class="a-AsideNav-item">
+                      <a href="/admin/form/basic.html"
+                        ><span class="a-AsideNav-itemArrow"></span
+                        ><span class="a-AsideNav-itemLabel">常规表单</span></a
+                      >
+                      <ul class="a-AsideNav-subList">
+                        <li class="a-AsideNav-subHeader"><a>常规表单</a></li>
+                        <li class="a-AsideNav-item">
+                          <a href="/admin/form/basic/advanced"
+                            ><span class="a-AsideNav-itemLabel"
+                              >三级目录测试</span
+                            ></a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="a-AsideNav-item  is-active">
+                      <a href="/admin/form/advanced"
+                        ><span class="a-AsideNav-itemLabel">复杂表单</span></a
+                      >
+                    </li>
+                    <li class="a-AsideNav-item">
+                      <a href="/admin/form/wizard"
+                        ><span class="a-AsideNav-itemLabel">向导</span></a
+                      >
+                    </li>
+                    <li class="a-AsideNav-item">
+                      <a href="/admin/form/editor"
+                        ><span class="a-AsideNav-itemLabel">代码编辑器</span></a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <li class="a-AsideNav-item">
+                  <a
+                    ><span class="a-AsideNav-itemArrow"></span
+                    ><span class="a-AsideNav-itemLabel">会员管理</span></a
+                  >
+                  <ul class="a-AsideNav-subList">
+                    <li class="a-AsideNav-subHeader"><a>会员管理</a></li>
+                    <li class="a-AsideNav-item">
+                      <a><span class="a-AsideNav-itemLabel">列表</span></a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+            <!--导航结束-->
+          </div>
+        </div>
+      </div>
+      <div class="a-Layout-content" role="main">
+        <div id="main" class="a-Layout-body"></div>
+      </div>
+    </div>
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+
+    <!-- 这个 js 主要包含一些简单导航边栏点击效果。 -->
+    <script src="/js/script.js"></script>
+    <script type="text/javascript">
+      (function () {
+        var amis = amisRequire("amis/embed");
+
+        // 用 amis 的 sdk 渲染内容区
+        amis.embed("#main", {
+          type: "page",
+          title: "基础表单",
+          subTitle: "展示一些常规的表单，包括验证、提示等等",
+          body: [
+            {
+              type: "form",
+              mode: "horizontal",
+              title: "常规表单示例",
+              affixFooter: true,
+              api: "/api/form/save",
+              actions: [
+                {
+                  label: "保存",
+                  type: "submit",
+                  level: "success",
+                },
+              ],
+              controls: [
+                {
+                  label: " 标题",
+                  type: "text",
+                  placeholder: "请输入标题",
+                  description: "请输入一个能吸引眼球的标题",
+                  name: "title",
+                  size: "md",
+                },
+
+                {
+                  label: "编号",
+                  required: true,
+                  type: "text",
+                  placeholder: "请输入编号",
+                  name: "b",
+                  size: "md",
+                  validations: {
+                    matchRegexp: "/^\\w{4}-\\w{4}-\\w{4}$/",
+                  },
+                  validationErrors: {
+                    matchRegexp: "您输入的内容格式不对，请按提示输入！",
+                  },
+                  hint: "输入范例：xxxx-xxxx-xxxx",
+                },
+
+                {
+                  label: "置顶",
+                  type: "switch",
+                  name: "c",
+                  inline: true,
+                  labelRemark: "开启后将置顶这条数据！",
+                },
+
+                {
+                  label: "活动时间",
+                  type: "date-range",
+                  name: "range",
+                  size: "md",
+                  remark: "这是一个字段时间范围",
+                },
+
+                {
+                  label: "日期范围",
+                  type: "group",
+                  controls: [
+                    {
+                      type: "date",
+                      size: "md",
+                      name: "start",
+                      mode: "inline",
+                      maxDate: "${end}",
+                    },
+
+                    {
+                      label: "到",
+                      type: "date",
+                      size: "md",
+                      name: "end",
+                      inputClassName: "m-l-sm",
+                      mode: "inline",
+                      minDate: "${start}",
+                      remark: "这是两个字段的时间范围",
+                    },
+                  ],
+                },
+
+                {
+                  label: "浏览器",
+                  type: "button-group",
+                  name: "browser",
+                  value: "chrome",
+                  options: [
+                    {
+                      label: "Chrome",
+                      value: "chrome",
+                    },
+
+                    {
+                      label: "火狐",
+                      value: "firefox",
+                    },
+
+                    {
+                      label: "IE",
+                      value: "ie",
+                    },
+                  ],
+                },
+
+                {
+                  type: "list",
+                  name: "taocan",
+                  label: "套餐选择",
+                  options: [
+                    {
+                      value: 1,
+                      body: `<div class="m-l-sm m-r-sm m-b-sm m-t-xs">
+                                <div class="text-md p-b-xs b-b m-b-xs">套餐：C01</div>
+                                <div class="text-sm">CPU：22核</div>
+                                <div class="text-sm">内存：10GB</div>
+                                <div class="text-sm">SSD盘：1024GB</div>
+                            </div>`,
+                    },
+                    {
+                      value: 2,
+                      body: `<div class="m-l-sm m-r-sm  m-b-sm m-t-xs">
+                            <div class="text-md p-b-xs b-b m-b-xs">套餐：C02</div>
+                            <div class="text-sm">CPU：23核</div>
+                            <div class="text-sm">内存：11GB</div>
+                            <div class="text-sm">SSD盘：1025GB</div>
+                            </div>`,
+                    },
+                    {
+                      value: 3,
+                      disabled: true,
+                      body: `<div class="m-l-sm m-r-sm  m-b-sm m-t-xs">
+                            <div class="text-md p-b-xs b-b m-b-xs">套餐：C03</div>
+                            <div class="text-sm">CPU：24核</div>
+                            <div class="text-sm">内存：12GB</div>
+                            <div class="text-sm">SSD盘：1026GB</div>
+                            </div>`,
+                    },
+                  ],
+                },
+
+                {
+                  label: "最爱周几",
+                  type: "select",
+                  name: "select",
+                  size: "md",
+                  clearable: true,
+                  options: [
+                    {
+                      label: "周一",
+                      value: "0",
+                    },
+
+                    {
+                      label: "周二",
+                      value: "1",
+                    },
+
+                    {
+                      label: "周三",
+                      value: "2",
+                    },
+
+                    {
+                      label: "周四",
+                      value: "3",
+                    },
+
+                    {
+                      label: "周五",
+                      value: "4",
+                    },
+
+                    {
+                      label: "周六",
+                      value: "5",
+                    },
+
+                    {
+                      label: "周日",
+                      value: "6",
+                    },
+                  ],
+                },
+
+                {
+                  label: "休息日",
+                  type: "list",
+                  name: "freeday",
+                  value: ["5", "6"],
+                  multiple: true,
+                  extractValue: true,
+                  options: [
+                    {
+                      label: "周一",
+                      value: "0",
+                    },
+
+                    {
+                      label: "周二",
+                      value: "1",
+                    },
+
+                    {
+                      label: "周三",
+                      value: "2",
+                    },
+
+                    {
+                      label: "周四",
+                      value: "3",
+                    },
+
+                    {
+                      label: "周五",
+                      value: "4",
+                    },
+
+                    {
+                      label: "周六",
+                      value: "5",
+                    },
+
+                    {
+                      label: "周日",
+                      value: "6",
+                    },
+                  ],
+                },
+
+                {
+                  label: "人数",
+                  type: "number",
+                  name: "num",
+                  size: "md",
+                  value: 10,
+                },
+
+                {
+                  label: "比率",
+                  type: "range",
+                  name: "percent",
+                },
+
+                {
+                  label: "简介",
+                  type: "textarea",
+                  name: "textarea",
+                },
+              ],
+            },
+          ],
+        });
+      })();
+    </script>
+  </body>
+</html>

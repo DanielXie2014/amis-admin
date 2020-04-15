@@ -59,15 +59,16 @@
             <nav class="a-AsideNav">
               <ul class="a-AsideNav-list">
                 <li class="a-AsideNav-label"><span>导航</span></li>
-                <li class="a-AsideNav-item is-active">
-                  <a href="javascript:void(0);"><i
+                <li class="a-AsideNav-item">
+                  <a href="/"
+                    ><i
                       class="a-AsideNav-itemIcon glyphicon glyphicon-signal"
                     ></i
                     ><span class="a-AsideNav-itemLabel">Dashboard</span></a
                   >
                   <div class="a-AsideNav-tooltip">Dashboard</div>
                 </li>
-                <li class="a-AsideNav-item">
+                <li class="a-AsideNav-item is-open">
                   <a
                     ><span class="a-AsideNav-itemArrow"></span
                     ><i class="a-AsideNav-itemIcon glyphicon glyphicon-edit"></i
@@ -101,7 +102,7 @@
                         ><span class="a-AsideNav-itemLabel">向导</span></a
                       >
                     </li>
-                    <li class="a-AsideNav-item">
+                    <li class="a-AsideNav-item is-active">
                       <a href="/admin/form/editor"
                         ><span class="a-AsideNav-itemLabel">代码编辑器</span></a
                       >
@@ -138,12 +139,25 @@
       (function () {
         var amis = amisRequire("amis/embed");
 
-
         // 用 amis 的 sdk 渲染内容区
         amis.embed("#main", {
           type: "page",
-          title: "Dashboard",
-          body: "body...",
+          title: "代码编辑器",
+          subTitle:
+            "使用的monaco-editor,用到了 worker, 如果控制台没有报错，说明一起正常。",
+          body: [
+            {
+              type: "form",
+              controls: [
+                {
+                  type: "editor",
+                  name: "js",
+                  label: "Javascript",
+                  size: "md",
+                },
+              ],
+            },
+          ],
         });
       })();
     </script>

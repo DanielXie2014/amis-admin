@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <!-- 这个一定要记得加，否则导航部分没样式 -->
+  <body class="amis-scope">
+    <div
+      class="a-Layout a-Layout--withAside a-Layout--headerFixed a-Layout--asideFixed a-Layout--noFooter"
+    >
+      <div class="a-Layout-header">
+        <div>
+          <div class="a-Layout-brandBar">
+            <button class="pull-right visible-xs">
+              <i class="glyphicon glyphicon-align-justify"></i>
+            </button>
+            <div class="a-Layout-brand">
+              <i class="fa fa-paw"></i
+              ><span class="hidden-folded m-l-sm">AMis Boilerplate</span>
+            </div>
+          </div>
+          <div class="a-Layout-headerBar">
+            <div class="nav navbar-nav hidden-xs">
+              <button
+                id="aside-toggler"
+                type="button"
+                class="a-Button a-Button--link a-Button--iconOnly navbar-btn"
+              >
+                <i class="fa fa-dedent"></i>
+              </button>
+            </div>
+            <div class="hidden-xs p-t-sm pull-right">
+              <div class="dropdown">
+                <span
+                  ><span class="pull-right m-b-n-sm m-l-sm"
+                    ><span><i class="iconfont icon-admin"></i></span
+                    ><i class="on md b-white bottom"></i></span
+                  ><span class="hidden-sm hidden-md">admin</span
+                  ><b class="caret"></b
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="a-Layout-aside">
+        <div class="a-Layout-asideWrap">
+          <div id="asideInner" class="a-Layout-asideInner">
+            <!--导航部分-->
+            <nav class="a-AsideNav">
+              <ul class="a-AsideNav-list">
+                <li class="a-AsideNav-label"><span>导航</span></li>
+                <li class="a-AsideNav-item">
+                  <a href="/"
+                    ><i
+                      class="a-AsideNav-itemIcon glyphicon glyphicon-signal"
+                    ></i
+                    ><span class="a-AsideNav-itemLabel">Dashboard</span></a
+                  >
+                  <div class="a-AsideNav-tooltip">Dashboard</div>
+                </li>
+                <li class="a-AsideNav-item is-open">
+                  <a
+                    ><span class="a-AsideNav-itemArrow"></span
+                    ><i class="a-AsideNav-itemIcon glyphicon glyphicon-edit"></i
+                    ><span class="a-AsideNav-itemLabel">表单页面</span></a
+                  >
+                  <ul class="a-AsideNav-subList">
+                    <li class="a-AsideNav-subHeader"><a>表单页面</a></li>
+                    <li class="a-AsideNav-item is-open ">
+                      <a href="/admin/form/basic.html"
+                        ><span class="a-AsideNav-itemArrow"></span
+                        ><span class="a-AsideNav-itemLabel">常规表单</span></a
+                      >
+                      <ul class="a-AsideNav-subList">
+                        <li class="a-AsideNav-subHeader"><a>常规表单</a></li>
+                        <li class="a-AsideNav-item is-active">
+                          <a href="/admin/form/basic/advanced"
+                            ><span class="a-AsideNav-itemLabel"
+                              >三级目录测试</span
+                            ></a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="a-AsideNav-item">
+                      <a href="/admin/form/advanced"
+                        ><span class="a-AsideNav-itemLabel">复杂表单</span></a
+                      >
+                    </li>
+                    <li class="a-AsideNav-item">
+                      <a href="/admin/form/wizard"
+                        ><span class="a-AsideNav-itemLabel">向导</span></a
+                      >
+                    </li>
+                    <li class="a-AsideNav-item">
+                      <a href="/admin/form/editor"
+                        ><span class="a-AsideNav-itemLabel">代码编辑器</span></a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <li class="a-AsideNav-item">
+                  <a
+                    ><span class="a-AsideNav-itemArrow"></span
+                    ><span class="a-AsideNav-itemLabel">会员管理</span></a
+                  >
+                  <ul class="a-AsideNav-subList">
+                    <li class="a-AsideNav-subHeader"><a>会员管理</a></li>
+                    <li class="a-AsideNav-item">
+                      <a><span class="a-AsideNav-itemLabel">列表</span></a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+            <!--导航结束-->
+          </div>
+        </div>
+      </div>
+      <div class="a-Layout-content" role="main">
+        <div id="main" class="a-Layout-body"></div>
+      </div>
+    </div>
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+
+    <!-- 这个 js 主要包含一些简单导航边栏点击效果。 -->
+    <script src="/js/script.js"></script>
+    <script type="text/javascript">
+      (function () {
+        var amis = amisRequire("amis/embed");
+
+        // 用 amis 的 sdk 渲染内容区
+        amis.embed("#main", {
+          type: "page",
+          title: "复杂表单",
+          subTitle: "展示表格编辑、联动等等",
+          body: [
+            {
+              type: "form",
+              mode: "horizontal",
+              title: "",
+              affixFooter: true,
+              api: "/api/form/save",
+              actions: [
+                {
+                  label: "保存",
+                  type: "submit",
+                  level: "success",
+                },
+              ],
+              controls: [
+                {
+                  type: "fieldSet",
+                  title: "基本配置",
+                  controls: [
+                    {
+                      type: "text",
+                      label: "任务名称",
+                      name: "title",
+                      size: "md",
+                      required: true,
+                    },
+
+                    {
+                      type: "textarea",
+                      label: "任务描述",
+                      name: "description",
+                      size: "md",
+                    },
+
+                    {
+                      label: "任务频率",
+                      type: "radios",
+                      name: "repeat",
+                      inline: true,
+                      value: "none",
+                      required: true,
+                      options: [
+                        {
+                          label: "不重复",
+                          value: "none",
+                        },
+
+                        {
+                          label: "每天",
+                          value: "day",
+                        },
+
+                        {
+                          label: "每周",
+                          value: "week",
+                        },
+
+                        {
+                          label: "每月",
+                          value: "month",
+                        },
+                      ],
+                    },
+
+                    {
+                      label: "每天几点",
+                      type: "select",
+                      name: "time",
+                      multiple: true,
+                      required: true,
+                      extractValue: true,
+                      visibleOn: 'this.repeat == "day"',
+                      inline: true,
+                      options: Array.from({ length: 24 }, (v, index) => ({
+                        value: index,
+                        label: `${index}:00`,
+                      })),
+                    },
+
+                    {
+                      label: "每周几执行",
+                      type: "button-group",
+                      name: "weekdays",
+                      size: "md",
+                      visibleOn: 'this.repeat == "week"',
+                      clearable: true,
+                      multiple: true,
+                      required: true,
+                      extractValue: true,
+                      maxLength: 7,
+                      options: [
+                        {
+                          label: "周一",
+                          value: "0",
+                        },
+
+                        {
+                          label: "周二",
+                          value: "1",
+                        },
+
+                        {
+                          label: "周三",
+                          value: "2",
+                        },
+
+                        {
+                          label: "周四",
+                          value: "3",
+                        },
+
+                        {
+                          label: "周五",
+                          value: "4",
+                        },
+
+                        {
+                          label: "周六",
+                          value: "5",
+                        },
+
+                        {
+                          label: "周日",
+                          value: "6",
+                        },
+                      ],
+                    },
+
+                    {
+                      label: "每月几号执行",
+                      type: "list",
+                      name: "monthday",
+                      size: "md",
+                      visibleOn: 'this.repeat == "month"',
+                      required: true,
+                      maxLength: 31,
+                      clearable: true,
+                      multiple: true,
+                      extractValue: true,
+                      options: Array.from({ length: 31 }, (v, index) => ({
+                        value: index,
+                        label: `${((index + 1) / 100).toFixed(2)}`.substr(-2),
+                      })),
+                    },
+                  ],
+                },
+
+                {
+                  type: "fieldSet",
+                  title: "其他信息",
+                  collapsable: true,
+                  controls: [
+                    {
+                      type: "combo",
+                      name: "admins",
+                      label: "用户列表",
+                      value: [""],
+                      description: "请输入用户信息，不要重复。",
+                      multiple: true,
+                      inline: true,
+                      controls: [
+                        {
+                          type: "text",
+                          name: "name",
+                          unique: true,
+                        },
+
+                        {
+                          type: "select",
+                          name: "perm",
+                          value: "read",
+                          options: [
+                            {
+                              label: "可读",
+                              value: "read",
+                            },
+
+                            {
+                              label: "可写",
+                              value: "write",
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      label: "新增一行",
+                      type: "button",
+                      actionType: "add",
+                      target: "thetable",
+                      level: "info",
+                    },
+                    {
+                      name: "thetable",
+                      type: "table",
+                      label: "任务参数",
+                      editable: true,
+                      addable: true,
+                      removable: true,
+                      columns: [
+                        {
+                          label: "参数名",
+                          name: "key",
+                          quickEdit: true,
+                        },
+
+                        {
+                          label: "参数值",
+                          name: "value",
+                          quickEdit: true,
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        });
+      })();
+    </script>
+  </body>
+</html>
