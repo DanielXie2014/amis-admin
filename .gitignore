@@ -3,3 +3,4 @@
 /package-lock.json
 /gh-pages
 /dist
+*.swp

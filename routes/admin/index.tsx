@@ -16,6 +16,9 @@ import Wizard from './form/Wizard';
 import Editor from './form/Editor';
 import CustomIndex from './customer/index';
 
+import SecondForm from './demo/Second';
+import ThirdForm from './demo/Third';
+
 type NavItem = {
     label: string;
     children?: Array<NavItem>;
@@ -79,6 +82,28 @@ const navigations:Array<NavItem> = [
                         label: '列表',
                         path: 'customer/index',
                         component: CustomIndex
+                    }
+                ]
+            },
+
+            {
+                label: '新增表单',
+                icon: 'glyphicon glyphicon-ok',
+                children: [
+                    {
+                        label: '二级表单',
+                        path: 'demo/second',
+                        component: SecondForm,
+                    },
+                    {
+                        label: '三级表单父目录',
+                        children: [
+                            {
+                                label: '三级表单',
+                                path: 'demo/third',
+                                component: ThirdForm,
+                            },
+                        ]
                     }
                 ]
             }
